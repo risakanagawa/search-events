@@ -14,7 +14,8 @@ class UpcomingMeetups extends React.Component {
       const photo = meetup.photo_url ? meetup.photo_url : 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg';
       return (
         <div className="four wide column" key={meetup.id}>
-          <Card style={{height: '400px', background:  `url(${photo}) center no-repeat` }} >
+          <Card style={{height: '400px'}}>
+          <Image src={ meetup.photo_url ? meetup.photo_url : 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg' }  style={{ height: '200px'}} />
             <Card.Content>
               <Card.Header>
               <a href={meetup.event_url}>{meetup.name}</a>

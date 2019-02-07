@@ -1,20 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Card, Icon, Image, Container } from "semantic-ui-react";
+import { Card, Icon, Image } from "semantic-ui-react";
 
 import { fetchUpcomingMeetups } from "../../actions";
-import SearchBar from '../Common/SearchBar'
+import SearchBar from "../Common/SearchBar";
+// import CategoryOption from "../Home/CategoryOption";
 
 class MeetupList extends React.Component {
   //get this.props.state
+  onSearchSubmit =( value, category) => {
+    console.log(this.props.options);
+    this.props.fetchUpcomingMeetups({ text: value, category : category });
+  };
 
   renderList() {
     return this.props.upcomingMeetups.map(meetup => {
       return (
-        <div className='meetup-lists' key={meetup.id}>
-          <Card style={{width: '100%'}}>
-            <Image  src={
-                meetup.photo_url ? meetup.photo_url : "https://react.semantic-ui.com/images/avatar/large/daniel.jpg" }size="small" />
+        <div className="meetup-lists" key={meetup.id}>
+          <Card style={{ width: "100%" }}>
+            <Image
+              src={
+                meetup.photo_url
+                  ? meetup.photo_url
+                  : "https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
+              }
+              size="small"
+            />
             <Card.Content header={meetup.name} />
             <Card.Content extra>
               <Icon name="user" />
@@ -27,14 +38,24 @@ class MeetupList extends React.Component {
   }
 
   render() {
-    return (<div>
-        <SearchBar />
-        {this.renderList()}</div>);
+    return (
+      <div className="meetup-map-list">
+        {/* <CategoryOption /> */}
+        <SearchBar
+          onSubmit={this.onSearchSubmit}
+        />
+        {this.renderList()}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
-  return { upcomingMeetups: state.meetups.upcomingMeetups };
+  console.log(state);
+  return {
+    upcomingMeetups: state.meetups.upcomingMeetups,
+    options: state.categories
+  };
 };
 
 export default connect(

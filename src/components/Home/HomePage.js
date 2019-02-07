@@ -1,23 +1,29 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { fetchUpcomingMeetups } from "../../actions";
+import { fetchUpcomingMeetups, fetchCategories } from "../../actions";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
 
 import Footer from "../Common/Footer";
 import SearchBar from "../Common/SearchBar";
-import CategoryOption from "./CategoryOption";
 import TrendingMeetUps from "./TrendingMeetUps";
 import UpcomingMeetUps from "./UpcomingMeetUps";
 import "./homepage.css";
 
 class HomePage extends React.Component {
-  onSearchSubmit = value => {
-    this.props.fetchUpcomingMeetups({ text: value });
+  onSearchSubmit = (value, category) => {
+    console.log(category)
+    this.props.fetchUpcomingMeetups({ text: value, category: category });
     this.props.history.push("/meetups");
+    console.log('hi!')
   };
 
+  componentDidMount() {
+    this.props.fetchCategories();
+  }
+
   render() {
+
     return (
       <div>
         <div className="banner">
@@ -28,7 +34,6 @@ class HomePage extends React.Component {
               </h1>
             </Grid.Column>
             <Grid.Column width={8} className='search-right' style={{display : 'flex', justifyContent: 'center', alignItems: 'center', flexDirection : 'column'}}>
-              <CategoryOption />
               <SearchBar onSubmit={this.onSearchSubmit} />
             </Grid.Column>
           </Grid>
@@ -45,5 +50,5 @@ class HomePage extends React.Component {
 
 export default connect(
   null,
-  { fetchUpcomingMeetups }
+  { fetchUpcomingMeetups, fetchCategories }
 )(withRouter(HomePage));

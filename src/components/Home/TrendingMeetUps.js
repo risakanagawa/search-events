@@ -15,7 +15,7 @@ class TrendingMeetUps extends React.Component {
       return (
         <div className="four wide column" key={meetup.id}>
           <Card style={{height: '400px'}}>
-          <Image src={ meetup.photo_url ? meetup.photo_url : 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg' }  size='large' />
+          <Image src={ meetup.photo_url ? meetup.photo_url : 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg' }  style={{ height: '200px'}} />
             <Card.Content>
               <Card.Header>
               <a href={meetup.event_url}>{meetup.name}</a>
