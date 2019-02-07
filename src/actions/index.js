@@ -57,7 +57,6 @@ export const fetchCategories = () => async dispatch => {
       city: "vancouver"
     }
   });
-  console.log(response);
   dispatch({ type: "FETCH_CATEGORY", payload: response.data.results });
 };
 

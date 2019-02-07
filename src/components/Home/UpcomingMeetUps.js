@@ -3,6 +3,8 @@ import { Card, Icon, Image, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { fetchUpcomingMeetups } from "../../actions";
 
+import noimage from '../../images/noimage.jpg'
+
 class UpcomingMeetups extends React.Component {
   componentDidMount() {
     this.props.fetchUpcomingMeetups();
@@ -11,11 +13,11 @@ class UpcomingMeetups extends React.Component {
 
   renderList() {
     return this.props.upcomingMeetups.map(meetup => {
-      const photo = meetup.photo_url ? meetup.photo_url : 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg';
+      const photo = meetup.photo_url ? meetup.photo_url : noimage;
       return (
         <div className="four wide column" key={meetup.id}>
           <Card style={{height: '400px'}}>
-          <Image src={ meetup.photo_url ? meetup.photo_url : 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg' }  style={{ height: '200px'}} />
+          <Image src={ meetup.photo_url ? meetup.photo_url : noimage }  style={{ height: '200px'}} />
             <Card.Content>
               <Card.Header>
               <a href={meetup.event_url}>{meetup.name}</a>

@@ -1,10 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Input,Select } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 import { fetchCategories } from "../../actions";
 
 class SearchBar extends React.Component {
-  state = { value: "", category: "" };
+  state = { value: "", category: null };
+
+  componentDidMount() {
+    this.props.fetchCategories();
+  }
 
   handleChange = (e) => {
     const selectedCategory =  parseFloat(e.target.options[e.target.selectedIndex].getAttribute('id'));
@@ -12,8 +16,6 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    console.log(this.state)
-
     const categories = this.props.categories.map(category => {
       return <option key={category.id} id={category.id} value={category.shortname} >{category.name}</option>
     });
@@ -38,6 +40,7 @@ class SearchBar extends React.Component {
               value={this.state.value}
               onChange={e => this.setState({ value: e.target.value })}
             />
+            {console.log(this.state)}
         </form>
       </div>
     );

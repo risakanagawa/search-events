@@ -35,10 +35,18 @@ html {
     margin: 1rem 0;
 }
 
-.meetup-list {
+.meetup-lists {
+    overflow-y: scroll;
+    height: 100vh;
+    -ms-overflow-style:none;
+    &::-webkit-scrollbar{
+        display:none;
+       }
+       
     .ui {
         .card {
             width: 100%;
+            max-height: 100%;
         }
     }
 }

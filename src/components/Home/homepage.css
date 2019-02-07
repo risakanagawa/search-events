@@ -28,8 +28,15 @@ html {
 .top-contents {
   margin: 1rem 0; }
 
-.meetup-list .ui .card {
-  width: 100%; }
+.meetup-lists {
+  overflow-y: scroll;
+  height: 100vh;
+  -ms-overflow-style: none; }
+  .meetup-lists::-webkit-scrollbar {
+    display: none; }
+  .meetup-lists .ui .card {
+    width: 100%;
+    max-height: 100%; }
 
 .footer {
   height: 100px;

@@ -12,15 +12,11 @@ import "./homepage.css";
 
 class HomePage extends React.Component {
   onSearchSubmit = (value, category) => {
-    console.log(category)
     this.props.fetchUpcomingMeetups({ text: value, category: category });
     this.props.history.push("/meetups");
-    console.log('hi!')
   };
 
-  componentDidMount() {
-    this.props.fetchCategories();
-  }
+
 
   render() {
 

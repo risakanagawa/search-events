@@ -8,16 +8,14 @@ class MeetupPage extends React.Component {
   render() {
     return (
       <div>
-        <Segment>
-          <Grid relaxed="very">
-            <Grid.Column width={5}>
+          <Grid style={{margin:0}}>
+            <Grid.Column width={6}>
               <MeetupList />
             </Grid.Column>
-            <Grid.Column width={11}>
+            <Grid.Column width={10}>
               <Map />
             </Grid.Column>
           </Grid>
-        </Segment>
       </div>
     );
   }

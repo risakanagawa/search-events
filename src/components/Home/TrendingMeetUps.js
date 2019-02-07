@@ -1,7 +1,10 @@
 import React from "react";
 import { Card, Icon, Image, Container } from "semantic-ui-react";
-import { fetchTrendingMeetups } from "../../actions";
 import { connect } from "react-redux";
+
+import { fetchTrendingMeetups } from "../../actions";
+import noimage from '../../images/noimage.jpg'
+
 
 class TrendingMeetUps extends React.Component {
   componentDidMount() {
@@ -9,13 +12,11 @@ class TrendingMeetUps extends React.Component {
   }
 
   renderList() {
-    console.log(this.props);
-    console.log('trending');
     return this.props.trendingMeetups && this.props.trendingMeetups.map(meetup => {
       return (
         <div className="four wide column" key={meetup.id}>
           <Card style={{height: '400px'}}>
-          <Image src={ meetup.photo_url ? meetup.photo_url : 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg' }  style={{ height: '200px'}} />
+          <Image src={ meetup.photo_url ? meetup.photo_url : noimage }  style={{ height: '200px'}} />
             <Card.Content>
               <Card.Header>
               <a href={meetup.event_url}>{meetup.name}</a>
