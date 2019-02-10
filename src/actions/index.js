@@ -3,6 +3,15 @@ import axios from "axios";
 
 const meetupsUrl = "https://api.meetup.com/2/open_events?&photo-host=public";
 
+
+export const getSearchTerm =(text, categoryId) => dispatch => {
+  dispatch({ type: "SEARCH_TERM", payload: { text : text, category: categoryId} });
+}
+
+export const getSelectedItem = meetup => dispatch => {
+  dispatch({ type: "SELECTED_ITEM", payload: meetup });
+}
+
 export const fetchTrendingMeetups = (options = {}) => async dispatch => {
   const response = await axios.get(meetupsUrl, {
     method: "get",
@@ -13,6 +22,7 @@ export const fetchTrendingMeetups = (options = {}) => async dispatch => {
       city: "vancouver",
       page: "4",
       desc: true,
+      text_format:  "plain",
       text: options.text,
       category: options.categoryId
     }
@@ -36,6 +46,8 @@ export const fetchUpcomingMeetups = (options = {}) => async dispatch => {
       city: "vancouver",
       page: "4",
       time: milliseconds + ",1w",
+      radius: 20,
+      text_format:  "plain",
       text: options.text,
       category: options.category
     }

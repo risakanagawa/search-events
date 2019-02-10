@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { fetchUpcomingMeetups, fetchCategories } from "../../actions";
+import { fetchUpcomingMeetups, fetchCategories, getSearchTerm } from "../../actions";
 import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
 
@@ -8,14 +8,15 @@ import Footer from "../Common/Footer";
 import SearchBar from "../Common/SearchBar";
 import TrendingMeetUps from "./TrendingMeetUps";
 import UpcomingMeetUps from "./UpcomingMeetUps";
+
 import "./homepage.css";
 
 class HomePage extends React.Component {
   onSearchSubmit = (value, category) => {
+    this.props.getSearchTerm(value, category);
     this.props.fetchUpcomingMeetups({ text: value, category: category });
     this.props.history.push("/meetups");
   };
-
 
 
   render() {
@@ -46,5 +47,5 @@ class HomePage extends React.Component {
 
 export default connect(
   null,
-  { fetchUpcomingMeetups, fetchCategories }
+  { fetchUpcomingMeetups, fetchCategories, getSearchTerm }
 )(withRouter(HomePage));

@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import { Input } from "semantic-ui-react";
 import { fetchCategories } from "../../actions";
 
+import './searchBar.css';
+
 class SearchBar extends React.Component {
-  state = { value: "", category: null };
+  state = { value: this.props.searchOptions.text, category: this.props.searchOptions.category };
 
   componentDidMount() {
-    this.props.fetchCategories();
+     this.props.fetchCategories();
   }
 
   handleChange = (e) => {
@@ -16,10 +18,11 @@ class SearchBar extends React.Component {
   }
 
   render() {
+
     const categories = this.props.categories.map(category => {
       return <option key={category.id} id={category.id} value={category.shortname} >{category.name}</option>
     });
-
+    console.log(categories)
     return (
       <div className="search-bar">
         <form
@@ -40,7 +43,6 @@ class SearchBar extends React.Component {
               value={this.state.value}
               onChange={e => this.setState({ value: e.target.value })}
             />
-            {console.log(this.state)}
         </form>
       </div>
     );
@@ -48,7 +50,7 @@ class SearchBar extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { categories: state.categories };
+  return { categories: state.categories, searchOptions : state.search_terms };
 };
 
 export default connect(

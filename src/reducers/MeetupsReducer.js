@@ -1,6 +1,8 @@
+
 const initialState = {
   trendingMeetups : [],
-  upcomingMeetups : []
+  upcomingMeetups : [],
+  // selectedMeetup : null 
 };
 
 
@@ -18,6 +20,10 @@ export default (state = initialState, action) => {
       upcomingMeetups: action.payload,
       searchOptions : action.options
     };
+    // case "SELECTED_ITEM":
+    // return {
+    //   selectedMeetup : action.payload
+    // };
     default:
       return state;
   }

@@ -1,0 +1,19 @@
+.search-bar {
+    position: fixed;
+    background: rgba($color: #fff, $alpha: 0.6);
+    z-index: 10;
+}
+
+.ui.items {
+    margin-top: 80px;
+    .item {
+        height: 180px;
+    }
+}
+
+.ui.divided.items>.item {
+    overflow: hidden;
+}
+.ui.items>.item>.image+.content {
+ padding-left: 1em; 
+}
