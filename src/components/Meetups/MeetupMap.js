@@ -107,8 +107,8 @@ class MapContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     places: state.meetups.upcomingMeetups,
-    selectedMeetup: state.selectedMeetup && state.selectedMeetup.selectedMeetup
-  };
+    selectedMeetup: state.meetups.selectedMeetup
+  }
 };
 
 export default connect(mapStateToProps)(

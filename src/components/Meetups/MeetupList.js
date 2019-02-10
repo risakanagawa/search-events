@@ -64,7 +64,7 @@ const mapStateToProps = state => {
   return {
     upcomingMeetups: state.meetups.upcomingMeetups,
     options: state.categories,
-    selectedMeetup : state.selected_item
+    selectedMeetup : state.meetups.selectedMeetup
   };
 };
 
