@@ -2,9 +2,9 @@
 const initialState = {
   trendingMeetups : [],
   upcomingMeetups : [],
+  meetups: [],
   selectedMeetup : null 
 };
-
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -15,16 +15,16 @@ export default (state = initialState, action) => {
         searchOptions : action.options
       };
     case "FETCH_UPCOMING":
-    return {
-      ...state,
-      upcomingMeetups: action.payload,
-      searchOptions : action.options
-    };
-    case "SELECTED_ITEM":
-    return {
-      ...state,
-      selectedMeetup : action.payload
-    };
+      return {
+        ...state,      
+        upcomingMeetups: !action.payload ? [] : action.payload.slice(0, 4),
+        searchOptions : action.options
+      };
+    case "FETCH_MEETUPS":
+      return {
+        ...state,
+        meetups: action.payload,
+      }
     default:
       return state;
   }

@@ -8,8 +8,6 @@ import './meetup.css';
 
 class MeetupPage extends React.Component {
 
-
-
   render() {
     return (
       <div>

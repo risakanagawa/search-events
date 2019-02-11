@@ -2,22 +2,37 @@ import React from "react";
 import { connect } from "react-redux";
 import { Icon, Button, Item } from "semantic-ui-react";
 
-import { fetchUpcomingMeetups, getSelectedItem } from "../../actions";
+import { fetchMeetups, setActiveMarker } from "../../actions";
 import SearchBar from "../Common/SearchBar";
 import noimage from "../../images/noimage.jpg";
 
 class MeetupList extends React.Component {
-  onSearchSubmit = (value, category) => {
-    this.props.fetchUpcomingMeetups({ text: value, category: category });
+  componentDidMount() {
+    this.props.fetchMeetups({ 
+      text: this.props.searchOptions.text, 
+      categoryId: this.props.searchOptions.categoryId 
+    });
+  }
+
+  onSearchSubmit = (options) => {
+    this.props.setActiveMarker({
+      selectedMeetup: {},
+      activeMarker: null,
+      showingInfoWindow: false
+    });
+    this.props.fetchMeetups(options);
   };
 
-  onSelected = (meetup) => {
-      this.props.getSelectedItem(meetup);
-
+  onMeetupSelectedFromList = (meetup) => {
+    this.props.setActiveMarker({
+      selectedMeetup: meetup,
+      showingInfoWindow: true,
+      activeMarker: null
+    });
   }
 
   renderList() {
-    return this.props.upcomingMeetups.map(meetup => {
+    return this.props.meetups && this.props.meetups.map(meetup => {
       let eventTime = new Date(meetup.time);
       const YYYY = eventTime.getFullYear();
       const MM = ("00" + (eventTime.getMonth() + 1)).slice(-2);
@@ -26,7 +41,7 @@ class MeetupList extends React.Component {
       const mm = ('0' + eventTime.getMinutes()).slice(-2);
       const eventStartDate =  YYYY + "/" + MM + "/" + dd + ' ,' + hh + ':' + mm;
       return (
-        <Item id={meetup.id} key={meetup.id} onClick={e => this.onSelected(meetup)}>
+        <Item id={meetup.id} key={meetup.id} onClick={e => this.onMeetupSelectedFromList(meetup)}>
           <Item.Image
             size="small"
             src={meetup.photo_url ? meetup.photo_url : noimage}
@@ -60,15 +75,14 @@ class MeetupList extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    upcomingMeetups: state.meetups.upcomingMeetups,
-    options: state.categories,
-    selectedMeetup : state.meetups.selectedMeetup
+    meetups: state.meetups.meetups,
+    selectedMeetup : state.map.selectedMeetup,
+    searchOptions : state.searchOptions
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchUpcomingMeetups, getSelectedItem }
+  { fetchMeetups, setActiveMarker }
 )(MeetupList);

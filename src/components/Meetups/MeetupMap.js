@@ -1,63 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { setActiveMarker } from "../../actions";
+
+let markers = [];
+
+let markersRendered = false;
 
 class MapContainer extends React.Component {
 
-  state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
-  };
-
-  onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedPlace: props,
+  onMarkerClick = (props, marker, e) => {
+    this.props.setActiveMarker({
+      selectedMeetup: props,
       activeMarker: marker,
       showingInfoWindow: true
     });
+  }
 
-  onMapClicked = (props) => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
+  onMapClicked = props => {
+    if (this.props.map.showingInfoWindow) {
+      this.props.setActiveMarker({
         showingInfoWindow: false,
-        activeMarker: null
-      })
+        activeMarker: null,
+        selectedMeetup: {}
+      });
     }
   };
 
-  render() {
-    let meetupPopupDom;
-    if (this.state.meetupPopup) {
-      meetupPopupDom = (
-        <InfoWindow 
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-        >
-          <div>{this.state.meetupPopup.name}</div>
-        </InfoWindow>
-      );
-      console.log('qqq');
-      console.log(meetupPopupDom);
-    }
+  onMarkerMounted = element => {
+    if (!element) return;
+    markers.push(element.marker);
+  };
 
-    let activeMarker;
-    let visible;
-    let selectedPlace;
-    let position;
-    if (this.props.selectedMeetup) {
-      
-      visible = true;
-      selectedPlace = this.props.selectedMeetup;
-      console.log('selectedPlace');
-      console.log(selectedPlace);
-      const lat = selectedPlace.venue ? selectedPlace.venue.lat : selectedPlace.group.group_lat;
-      const lon = selectedPlace.venue ? selectedPlace.venue.lon : selectedPlace.group.group_lon;
-      position = { lat, lng: lon };
-    } else {
-      activeMarker = this.state.activeMarker;
-      visible = this.state.showingInfoWindow;
-      selectedPlace = this.state.selectedPlace;
+  render() {
+    let activeMarker = this.props.map.activeMarker; // It's from the Redux store.
+    if (!activeMarker && this.props.map.selectedMeetup) { // It's coming from the list of meetups.
+      activeMarker = markers.find((marker)=>{
+        return marker.meetupId === this.props.map.selectedMeetup.id;
+      })
     }
     
     return (
@@ -68,37 +48,34 @@ class MapContainer extends React.Component {
         style={{ height: "100vh" }}
         onClick={this.onMapClicked}
       >
-        {this.props.places &&
-          this.props.places.map((place) => {
-            const lat = place.venue ? place.venue.lat : place.group.group_lat;
-            const lon = place.venue ? place.venue.lon : place.group.group_lon;
-            const selectedMeetup = this.props.selectedMeetup;
+        {this.props.meetups &&
+          this.props.meetups.map((meetup, index)=> {
+            const lat = meetup.venue ? meetup.venue.lat : meetup.group.group_lat;
+            const lon = meetup.venue ? meetup.venue.lon : meetup.group.group_lon;
             const marker = (
               <Marker
+                {...meetup}
+                ref={this.onMarkerMounted}
                 onClick={this.onMarkerClick}
-                title={place.name}
-                key={place.id}
+                title={meetup.name}
+                key={meetup.id}
+                meetupId={meetup.id}
                 position={{ lat: lat, lng: lon }}
               />
             );
-            // if (selectedMeetup && selectedMeetup.id === place.id) {
-            //   console.log('HAAAAA');
-            //   console.log(marker);
-            //   activeMarker = marker;
-            //   visible = true;
-            //   selectedPlace = place;
-            // }
+            if(this.props.meetups.length - 1 === index){
+              markersRendered = true;
+            }
             return marker;
           })}
-          <InfoWindow
-            marker={activeMarker}
-            visible={visible}
-            position={position}
-          >
-              <div>
-                <h1>{selectedPlace.name}</h1>
-              </div>
-          </InfoWindow>
+        {
+          this.props.map.selectedMeetup && 
+          <InfoWindow marker={activeMarker} visible={this.props.map.showingInfoWindow}>
+            <div>
+              <h1>{this.props.map.selectedMeetup.name}</h1>
+            </div>
+        </InfoWindow>         
+        }        
       </Map>
     );
   }
@@ -106,12 +83,14 @@ class MapContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    places: state.meetups.upcomingMeetups,
-    selectedMeetup: state.meetups.selectedMeetup
-  }
+    meetups: state.meetups.meetups,
+    selectedMeetup: state.meetups.selectedMeetup,
+    searchOptions : state.searchOptions,
+    map : state.map
+  };
 };
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps, {setActiveMarker})(
   GoogleApiWrapper({
     apiKey: "AIzaSyBLNCkCZMaNZ2U9h_JwOJqXm1kIde8C71k"
   })(MapContainer)
