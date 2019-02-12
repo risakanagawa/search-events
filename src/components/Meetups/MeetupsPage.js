@@ -12,7 +12,7 @@ class MeetupPage extends React.Component {
     return (
       <div>
           <Grid style={{margin:0}}>
-            <Grid.Column width={6}>
+            <Grid.Column width={6} className="meetup-list">
               <MeetupList style={{ height: "100vh", overflowY: "scroll" }} />
             </Grid.Column>
             <Grid.Column width={10}>

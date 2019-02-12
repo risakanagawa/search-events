@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import { fetchMeetups, fetchCategories, setSearchOptions } from "../../actions";
 import { connect } from "react-redux";
-import { Grid } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 
 import Footer from "../Common/Footer";
 import SearchBar from "../Common/SearchBar";
@@ -19,14 +19,26 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
+        <header className="header-top">
+          <a href="#"><h2 className="header-title">VM</h2></a>
+        </header>
         <div className="banner">
-          <Grid className='ui container'>
+          <Grid className="ui container">
             <Grid.Column width={8}>
               <h1 className="heading">
                 Search Hot Events in Vancouver, Canada!
               </h1>
             </Grid.Column>
-            <Grid.Column width={8} className='search-right' style={{display : 'flex', justifyContent: 'center', alignItems: 'center', flexDirection : 'column'}}>
+            <Grid.Column
+              width={8}
+              className="search-right"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column"
+              }}
+            >
               <SearchBar onSubmit={this.onSearchSubmit} />
             </Grid.Column>
           </Grid>

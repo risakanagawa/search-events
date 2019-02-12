@@ -17,6 +17,7 @@ class TrendingMeetUps extends React.Component {
       let eventTime = new Date(meetup.created);
       const YYYY = eventTime.getFullYear();
       const MM = eventTime.toLocaleString('en-us', { month: 'long' });
+      let short_description = meetup.description.split(/\s+/).slice(0,10).join(" ");
       return (
         <div className="four wide column" key={meetup.id}>
           <Card style={{height: '400px'}}>
@@ -27,7 +28,7 @@ class TrendingMeetUps extends React.Component {
               </Card.Header>
               <Card.Meta>Joined in {MM}, {YYYY}</Card.Meta>
               <Card.Description>
-                Daniel is a comedian living in Nashville.
+                {short_description} ...
               </Card.Description>
             </Card.Content>
             <Card.Content extra>

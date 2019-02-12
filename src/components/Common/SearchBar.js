@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Input } from "semantic-ui-react";
+import { Input, Button } from "semantic-ui-react";
 import { fetchCategories, setSearchOptions } from "../../actions";
 
 import "./searchBar.css";
@@ -70,6 +70,7 @@ class SearchBar extends React.Component {
             onChange={this.onInputChange}
           />
         </form>
+        <Button type="submit">Search!</Button>
       </div>
     );
   }

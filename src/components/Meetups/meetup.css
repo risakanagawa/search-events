@@ -1,10 +1,5 @@
-.search-bar {
-  position: fixed;
-  background: rgba(255, 255, 255, 0.6);
-  z-index: 10; }
-
 .ui.items {
-  margin-top: 80px; }
+  margin-top: 120px; }
   .ui.items .item {
     height: 180px; }
 
@@ -13,3 +8,27 @@
 
 .ui.items > .item > .image + .content {
   padding-left: 1em; }
+
+.gm-style .gm-style-iw {
+  background: none;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 120px !important;
+  padding-top: 10px;
+  display: block !important; }
+
+.gm-style .gm-style-iw #google-popup p {
+  padding: 10px; }
+
+.gm-style div div div div div div div div {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  color: #8437ff;
+  font-size: 16px; }
+
+.gm-style div div div div div div div div a {
+  color: #8200fcab;
+  font-weight: bold; }

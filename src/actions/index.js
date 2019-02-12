@@ -46,7 +46,7 @@ export const fetchMeetups = (options = {}) => async dispatch => {
       key: "483d53f5080354478142a1f0535841",
       country: "ca",
       city: "vancouver",
-      desc: true,
+      page: "30",
       text_format:  "plain",
       text: options.text,
       ...(options.categoryId && {category: options.categoryId})
