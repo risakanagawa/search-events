@@ -1,7 +1,9 @@
 .ui.items {
-  margin-top: 120px; }
+  margin-top: 100px; }
   .ui.items .item {
-    height: 180px; }
+    height: 200px; }
+    .ui.items .item:hover {
+      box-shadow: 5px 5px #fc5277; }
 
 .ui.divided.items > .item {
   overflow: hidden; }
@@ -12,11 +14,16 @@
 .gm-style .gm-style-iw {
   background: none;
   left: 0 !important;
-  width: 100% !important;
+  width: 150px !important;
   height: 100% !important;
   min-height: 120px !important;
   padding-top: 10px;
-  display: block !important; }
+  display: block !important;
+  text-align: center; }
+
+.map-btn {
+  color: #fc5277;
+  padding: .3rem .5rem; }
 
 .gm-style .gm-style-iw #google-popup p {
   padding: 10px; }

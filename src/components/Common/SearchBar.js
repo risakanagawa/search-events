@@ -16,9 +16,9 @@ class SearchBar extends React.Component {
   }
 
   handleChange = e => {
-    const categoryId = parseFloat(
-      e.target.options[e.target.selectedIndex].getAttribute("id")
-    ) || '';
+    const categoryId =
+      parseFloat(e.target.options[e.target.selectedIndex].getAttribute("id")) ||
+      "";
     this.setState({ categoryId });
   };
 
@@ -29,10 +29,7 @@ class SearchBar extends React.Component {
   render() {
     const categories = this.props.categories.map(category => {
       return (
-        <option key={category.id} 
-                id={category.id} 
-                value={category.id}
-        >
+        <option key={category.id} id={category.id} value={category.id}>
           {category.name}
         </option>
       );
@@ -42,9 +39,9 @@ class SearchBar extends React.Component {
         <form
           onSubmit={e => {
             e.preventDefault();
-            const options = { 
-              categoryId: this.state.categoryId, 
-              text: this.state.text 
+            const options = {
+              categoryId: this.state.categoryId,
+              text: this.state.text
             };
             this.props.setSearchOptions(options);
             this.props.onSubmit(options);
@@ -69,8 +66,10 @@ class SearchBar extends React.Component {
             value={this.state.text}
             onChange={this.onInputChange}
           />
+          <Button type="submit">
+           Search!
+          </Button>
         </form>
-        <Button type="submit">Search!</Button>
       </div>
     );
   }

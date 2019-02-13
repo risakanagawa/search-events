@@ -20,7 +20,7 @@ html {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: linear-gradient(to right, rgba(29, 0, 133, 0.863), rgba(255, 238, 4, 0.26)), url("../../images/banner.jpeg");
+  background: linear-gradient(to right, rgba(29, 0, 133, 0.863), rgba(255, 238, 4, 0.274)), url("../../images/banner.jpeg");
   background-attachment: fixed;
   background-position: bottom;
   background-size: cover;
@@ -28,7 +28,7 @@ html {
   .banner:before {
     content: '';
     position: absolute;
-    background: rgba(17, 18, 73, 0.418);
+    background: inear-gradient(to right, rgba(17, 18, 73, 0.418), rgba(68, 71, 255, 0.418));
     background-blend-mode: color-burn;
     width: 50%;
     z-index: 10;
@@ -41,6 +41,21 @@ html {
     width: 600px;
     font-size: 5rem;
     color: #fff; }
+
+.ui .card .card-btn {
+  color: #fc5277;
+  border: 2px solid #fc5277;
+  background: none;
+  margin-top: 2rem;
+  position: absolute;
+  bottom: 55px;
+  transition: all 0.3s ease; }
+  .ui .card .card-btn:hover {
+    background-color: #fc5277;
+    color: #fff; }
+
+.ui .event-lists {
+  margin: 2rem 0; }
 
 .search-right {
   display: flex;
@@ -64,6 +79,8 @@ html {
 .footer {
   height: 100px;
   text-align: center;
-  border-top: 1px solid black; }
-  .footer h3 {
-    line-height: 100px; }
+  background: rgba(17, 18, 73, 0.418); }
+  .footer h4 {
+    font-size: 1rem;
+    line-height: 100px;
+    color: #Fff; }

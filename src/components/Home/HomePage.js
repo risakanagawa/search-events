@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import { fetchMeetups, fetchCategories, setSearchOptions } from "../../actions";
 import { connect } from "react-redux";
-import { Grid, Header } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 import Footer from "../Common/Footer";
 import SearchBar from "../Common/SearchBar";

@@ -40,8 +40,11 @@ class MeetupList extends React.Component {
       const hh = ('0' + eventTime.getHours()).slice(-2);
       const mm = ('0' + eventTime.getMinutes()).slice(-2);
       const eventStartDate =  YYYY + "/" + MM + "/" + dd + ' ,' + hh + ':' + mm;
+      const selectedStyle =  meetup.id === this.props.map.selectedMeetup.id ? { background: '#F4F4F4', boxShadow: ' 5px 5px rgb(252, 82, 119)', padding: '.7rem 0' } : { background: 'none', padding: '.7rem 0' };
+
       return (
-        <Item id={meetup.id} key={meetup.id} onClick={e => this.onMeetupSelectedFromList(meetup)}>
+        <Item id={meetup.id} key={meetup.id} onClick={e => this.onMeetupSelectedFromList(meetup)}
+        style={selectedStyle} >
           <Item.Image
             size="small"
             src={meetup.photo_url ? meetup.photo_url : noimage}
@@ -55,7 +58,7 @@ class MeetupList extends React.Component {
             <Item.Extra>
               <Icon color="green" name="check" /> {meetup.yes_rsvp_count}Going
               <Button floated="right">
-                <a href={meetup.event_url}>Check</a>
+                <a href={meetup.event_url}>Website</a>
               </Button>
             </Item.Extra>
           </Item.Content>
@@ -75,10 +78,12 @@ class MeetupList extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
     meetups: state.meetups.meetups,
     selectedMeetup : state.map.selectedMeetup,
-    searchOptions : state.searchOptions
+    searchOptions : state.searchOptions,
+    map: state.map
   };
 };
 

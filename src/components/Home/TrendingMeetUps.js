@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Icon, Image, Container } from "semantic-ui-react";
+import { Card, Icon, Image, Button, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import { fetchTrendingMeetups } from "../../actions";
@@ -20,7 +20,7 @@ class TrendingMeetUps extends React.Component {
       let short_description = meetup.description.split(/\s+/).slice(0,10).join(" ");
       return (
         <div className="four wide column" key={meetup.id}>
-          <Card style={{height: '400px'}}>
+          <Card style={{height: '450px'}}>
           <Image src={photo}  style={{ height: '200px'}} />
             <Card.Content>
               <Card.Header>
@@ -30,6 +30,7 @@ class TrendingMeetUps extends React.Component {
               <Card.Description>
                 {short_description} ...
               </Card.Description>
+              <a href={meetup.event_url}><Button className="card-btn" >Check</Button></a>
             </Card.Content>
             <Card.Content extra>
                 <Icon name="check" />
@@ -43,7 +44,7 @@ class TrendingMeetUps extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container className="event-lists">
         <h1>Trending Events in Vancouver</h1>
         <div className="ui grid">{this.renderList()}</div>
       </ Container>

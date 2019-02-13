@@ -34,9 +34,8 @@ class MapContainer extends React.Component {
   };
 
   render() {
-    let activeMarker = this.props.map.activeMarker; // It's from the Redux store.
+    let activeMarker = this.props.map.activeMarker;
     if (!activeMarker && this.props.map.selectedMeetup) {
-      // It's coming from the list of meetups.
       activeMarker = markers.find(marker => {
         return marker.meetupId === this.props.map.selectedMeetup.id;
       });
@@ -80,8 +79,7 @@ class MapContainer extends React.Component {
             marker={activeMarker}
             visible={this.props.map.showingInfoWindow}
             >
-              <p>{this.props.map.selectedMeetup.name}</p>
-
+              <p style={{ fontSize: '.9rem'}}>{this.props.map.selectedMeetup.name}</p>
           </InfoWindow>
         )}
       </Map>
