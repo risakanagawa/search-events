@@ -78,7 +78,6 @@ class MeetupList extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     meetups: state.meetups.meetups,
     selectedMeetup : state.map.selectedMeetup,

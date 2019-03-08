@@ -19,6 +19,7 @@ export const setActiveMarker = meetup => dispatch => {
 export const fetchTrendingMeetups = (options = {}) => async dispatch => {
   const response = await axios.get(meetupsUrl, {
     method: "get",
+    dataType:'json',
     params: {
       sign: true,
       key: "483d53f5080354478142a1f0535841",
@@ -41,6 +42,7 @@ export const fetchTrendingMeetups = (options = {}) => async dispatch => {
 export const fetchMeetups = (options = {}) => async dispatch => {
   const response = await axios.get(meetupsUrl, {
     method: "get",
+    dataType:'json',
     params: {
       sign: true,
       key: "483d53f5080354478142a1f0535841",
@@ -64,6 +66,7 @@ export const fetchUpcomingMeetups = (options = {}) => async dispatch => {
   const milliseconds = currentTime.getTime();
   const response = await axios.get(meetupsUrl, {
     method: "get",
+    dataType:'json',
     params: {
       sign: true,
       key: "483d53f5080354478142a1f0535841",
