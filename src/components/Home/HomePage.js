@@ -12,6 +12,7 @@ import UpcomingMeetUps from "./UpcomingMeetUps";
 import "./homepage.css";
 
 class HomePage extends React.Component {
+
   onSearchSubmit = () => {
     this.props.history.push("/meetups");
   };
